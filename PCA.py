@@ -21,18 +21,18 @@ eigenvectors = eigenvectors[:, eigenvalue_order]
 
 explained_variance = eigenvalues / np.sum(eigenvalues)
 
-
-transformed_data = np.dot(data_matrix, eigenvectors)
-
-plt.scatter(x, y, label="Original Data", color='blue')
+plt.figure(figsize=(8, 8))
+plt.scatter(x, y, label="Original Data", color='blue', marker='o', s=100, edgecolors='k')
 
 for i, eigenvector in enumerate(eigenvectors.T):
-    plt.quiver(x_mean, y_mean, eigenvector[0], eigenvector[1], angles='xy', scale_units='xy', scale=1, color='red', label=f"Principal Component {i+1}")
+    color = 'red' if i == 0 else 'green'  
+    plt.quiver(x_mean, y_mean, eigenvector[0], eigenvector[1], angles='xy', scale_units='xy', scale=0.5, color=color, label=f"Principal Component {i+1}")
 
 plt.xlabel("X")
 plt.ylabel("Y")
-plt.legend()
-plt.grid()
+plt.legend(loc='upper right')
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.title("PCA Analysis")
 plt.show()
 
 print("Principal Components (Eigenvectors):")
